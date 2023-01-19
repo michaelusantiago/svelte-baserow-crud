@@ -7,6 +7,7 @@
   import { Circle } from "svelte-loading-spinners"
 
   let searchInput: HTMLInputElement
+  let total_clients: number = 0
 
   const onSearch = async (e: Event) => {
     const key_pressed = e as KeyboardEvent
@@ -23,7 +24,10 @@
     searchInput.focus()
   }
 
-  onMount(async () => { getClients() })
+  onMount(async () => { await getClients() })
+  $: {
+    if ($clients) total_clients = new Array(...$clients).length
+  }
 </script>
 
 <main>
@@ -47,6 +51,7 @@
     </div>
   </div>
   <div class="actions-buttons-wrapper">
+    <div class="total-clients">{total_clients} clients in total</div>
     <button
       class="button-add"
       on:click={() => show_add_form = true}>
@@ -146,6 +151,11 @@
     justify-content: flex-end;
     padding: 10px;
     gap: 5px;
+    .total-clients {
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
     button {
       i {
         margin-right: 5px;
