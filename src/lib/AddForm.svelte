@@ -159,7 +159,7 @@
                         bind:this={fb_page}
                         name="facebook-page"
                         type="url"
-                        placeholder="https://wwww.facebook.com"
+                        placeholder="https://www.facebook.com"
                     />
                 </div>
             </div>
