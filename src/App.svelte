@@ -15,8 +15,11 @@
   }
 
   const onClickClearSearch = async () => {
-    await getClients()
-    searchInput.value = ""
+    if (searchInput.value) {
+      await getClients()
+      searchInput.value = ""
+    }
+
     searchInput.focus()
   }
 
