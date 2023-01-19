@@ -37,8 +37,6 @@ export const getClients = async (query: string = null) => {
     const data = await result.json()
     isLoading.set(false)
     clients.set(data.results)
-
-    console.log(data.results)
 }
 
 export const addNewClient = async (client: Client) => {

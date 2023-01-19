@@ -34,6 +34,7 @@
       <i class="ri-search-line"></i>
       <input
         on:keypress={onSearch}
+        on:input={async () => { if (!searchInput.value) await getClients() }}
         bind:this={searchInput}
         id="search"
         type="text"
