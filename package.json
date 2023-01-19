@@ -1,0 +1,32 @@
+{
+  "name": "everneat",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "check": "svelte-check --tsconfig ./tsconfig.json"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^2.0.0",
+    "@tsconfig/svelte": "^3.0.0",
+    "auto-prefixer": "^0.4.2",
+    "postcss-nested": "^6.0.0",
+    "postcss-preset-env": "^7.8.3",
+    "precss": "^4.0.0",
+    "svelte": "^3.54.0",
+    "svelte-check": "^2.10.0",
+    "svelte-loading-spinners": "^0.3.4",
+    "tslib": "^2.4.1",
+    "typescript": "^4.9.3",
+    "vite": "^4.0.0"
+  },
+  "dependencies": {
+    "axios": "^1.2.2",
+    "postcss": "^8.4.21",
+    "remixicon": "^2.5.0",
+    "svelte-preprocess": "^5.0.0"
+  }
+}
