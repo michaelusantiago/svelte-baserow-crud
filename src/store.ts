@@ -69,8 +69,6 @@ export const addNewClient = async (client: Client) => {
         },
         body: JSON.stringify(client)
     })
-
-    await getClients()
 }
 
 export const updateClient = async (client_id: number, client: Client): Promise<any> => {
@@ -110,8 +108,7 @@ export const updateClient = async (client_id: number, client: Client): Promise<a
 
     const _client = await result.json() as (Client | any)
 
-    if (_client.error) return _client
-    else
+    if (!_client.error)
         // Update only the record affected by update call and not re-reading the entire collection
         clients.update(cs => {
             const client_to_update = cs.find((c: Client) => c.id === _client.id) as Client
@@ -125,7 +122,9 @@ export const updateClient = async (client_id: number, client: Client): Promise<a
             client_to_update.fld_logo = _client.fld_logo
 
             return cs
+
         }) 
+    else return _client
 }
 
 export const deleteClient = async (client_id: number): Promise<any> => {
@@ -137,9 +136,12 @@ export const deleteClient = async (client_id: number): Promise<any> => {
         }
     })
 
-    const _delete_result = await result.json()
-    if (_delete_result.error) return _delete_result
-    else clients.update(cs => cs.filter((c: Client) => c.id !== client_id))
+    if (result.ok)
+        clients.update(cs => cs.filter((c: Client) => c.id !== client_id))
+    else {
+        const _delete_result = await result.json()
+        return _delete_result
+    }
 }
 
 // For uploading image

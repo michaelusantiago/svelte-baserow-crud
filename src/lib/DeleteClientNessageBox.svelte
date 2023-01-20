@@ -13,7 +13,6 @@
 
     const onClickYes = async () => {
         deleting = true
-
         const result = await deleteClient(client_id)
         deleting = false
 

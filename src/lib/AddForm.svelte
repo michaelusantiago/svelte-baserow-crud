@@ -1,7 +1,7 @@
 <script lang="ts">
     import ModalWindow from "./ModalWindow.svelte";
     import { createEventDispatcher, onMount } from "svelte"
-    import { addNewClient } from "../store";
+    import { addNewClient, getClients } from "../store";
     import { Circle } from "svelte-loading-spinners"
 
     let fileInput: string
@@ -34,6 +34,7 @@
 
     const onClickSave = async () => {
         saving = true
+
         let tp = phone_number.value.match(tp_number_pattern)
         let cp = phone_number.value.match(cp_number_pattern)
 
@@ -45,6 +46,7 @@
             field_error.err_msg = "URL is not valid. Please check the format"
             field_error.found = true
             fb_page.focus()
+            saving = false
             return
         }
 
@@ -53,6 +55,7 @@
             field_error.err_msg = "Email is invalid. Please check the format."
             field_error.found = true
             email.focus()
+            saving = false
             return
         }
 
@@ -62,15 +65,17 @@
             field_error.err_msg = "URL is not valid. Please check the format"
             field_error.found = true
             company_website.focus()
+            saving = false
             return
         }
 
         // Validate Phone Number
         // if (!(tp || cp) && phone_number.value) {
-        if (tp || cp) {
+        if (!(tp || cp)) {
             field_error.found = true
             field_error.err_msg = "Phone number is invalid. Please follow given phone format."
             phone_number.focus()
+            saving = false
             return
         }
 
@@ -87,6 +92,8 @@
         })
 
         saving = false
+
+        await getClients()
 
         onClickClose()
     }
