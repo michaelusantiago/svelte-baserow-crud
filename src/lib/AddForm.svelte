@@ -66,7 +66,8 @@
         }
 
         // Validate Phone Number
-        if (!(tp || cp) && phone_number.value) {
+        // if (!(tp || cp) && phone_number.value) {
+        if (tp || cp) {
             field_error.found = true
             field_error.err_msg = "Phone number is invalid. Please follow given phone format."
             phone_number.focus()
