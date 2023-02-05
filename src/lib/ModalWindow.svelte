@@ -38,6 +38,15 @@
 	}
 </script>
 
+<svelte:window on:keydown={handle_keydown}/>
+
+<div class="modal-window-wrapper" on:click|self={onClickClose} on:keydown={() => {}}>
+    <div role="dialog" class="modal-window" aria-modal="true" bind:this={modal}>
+        <button on:click={onClickClose} class="close-btn">&#x26CC;</button>
+        <div class="content"><slot>no content</slot></div>
+    </div>
+</div>
+
 <style>
     :root {
         --mw-height: 300px;
@@ -89,12 +98,3 @@
         padding: 2px 5px;
     }
 </style>
-
-<svelte:window on:keydown={handle_keydown}/>
-
-<div class="modal-window-wrapper" on:click|self={onClickClose} on:keydown={() => {}}>
-    <div role="dialog" class="modal-window" aria-modal="true" bind:this={modal}>
-        <button on:click={onClickClose} class="close-btn">&#x26CC;</button>
-        <div class="content"><slot>no content</slot></div>
-    </div>
-</div>

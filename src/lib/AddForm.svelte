@@ -105,10 +105,12 @@
     onMount( () => { full_name.focus() })
 
     const onFileSelected = (e)  => {
-        let reader = new FileReader()
-        let image = e.target.files[0]
-        reader.readAsDataURL(image)
-        reader.onload = e => company_logo = e.target.result
+        if (e.target.files?.length) {
+            let reader = new FileReader()
+            let image = e.target.files[0]
+            reader.readAsDataURL(image)
+            reader.onload = e => company_logo = e.target.result
+        } else company_logo = "https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-512.png"
     }
 
     $: {
