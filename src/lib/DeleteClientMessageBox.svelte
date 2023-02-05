@@ -27,22 +27,31 @@
 
 <ModalWindow
     on:close={onClickClose}
-    --mw-height="240px"
-    --mw-width="420px"
->
-    <i class="ri-file-info-line"></i>
-    {#if !deleting}
-        <h3>Are you sure you want to delete record #{client_id}?</h3>
-    {:else}
-        <h3><span>Deleting record #{client_id}</span> <Circle size="15" color="#FF3E00" unit="px" duration="1s"/></h3>
-    {/if}
-    <div class="buttons-wrapper">
-        <button on:click={onClickClose}>Cancel</button>
-        <button on:click={onClickYes}>Yes</button>
+    --mw-height="220px"
+    --mw-width="420px">
+    <div class="messagebox-wrapper">
+        <i class="ri-file-info-line"></i>
+        {#if !deleting}
+            <h3>Are you sure you want to delete record #{client_id}?</h3>
+        {:else}
+            <h3><span>Deleting record #{client_id}</span> <Circle size="15" color="#FF3E00" unit="px" duration="1s"/></h3>
+        {/if}
+        <div class="buttons-wrapper">
+            <button on:click={onClickClose}>Cancel</button>
+            <button on:click={onClickYes}>Yes</button>
+        </div>
     </div>
 </ModalWindow>
 
 <style lang="postcss">
+    .messagebox-wrapper {
+        display: flex;
+        place-content: center;
+        flex-direction: column;
+        align-items: center;
+        height: 100%;
+    }
+
     .buttons-wrapper {
         padding: 20px;
         button { padding: 10px 25px; }

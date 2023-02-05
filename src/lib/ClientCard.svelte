@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { Client } from "../store"
     import UpdateForm from "./UpdateForm.svelte"
-    import DeleteClientNessageBox from "./DeleteClientNessageBox.svelte"
+    import DeleteClientMessageBox from "./DeleteClientMessageBox.svelte"
     export let client: Client 
     let show_edit = false
     let show_delete = false
@@ -26,7 +26,7 @@
 <main>
     <!-- display a confirmation window here -->
     {#if show_delete}
-        <DeleteClientNessageBox
+        <DeleteClientMessageBox
             on:close={() => show_delete = false}
             {client_id}
         />
