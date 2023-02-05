@@ -131,7 +131,7 @@
 
 <ModalWindow
     on:close={onClickClose}
-    --mw-height="550px"
+    --mw-height="480px"
     --mw-width="900px"
 >
     <form on:submit|preventDefault class="form-add-client">
