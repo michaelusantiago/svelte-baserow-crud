@@ -16,7 +16,13 @@
 		if (e.key === 'Tab') {
 			// trap focus
 			const nodes = modal.querySelectorAll('*');
-			const tabbable = Array.from(nodes).filter((n:HTMLElement) =>  n.tabIndex >= 0);
+			const tabbable = Array.from(nodes).filter((n: HTMLElement) => {
+                // If element is button and disabled, skip that specifict element (button)
+                // This is to resolve freezing issue when the element is reached by tab but the element is disabled
+                const disabled_element = (n as HTMLButtonElement)
+                disabled_element.disabled
+                return (n.tabIndex >= 0 && (!disabled_element.disabled))
+            });
 
 			let index = tabbable.indexOf(document.activeElement);
 			if (index === -1 && e.shiftKey) index = 0;
@@ -42,7 +48,7 @@
 
 <div class="modal-window-wrapper" on:click|self={onClickClose} on:keydown={() => {}}>
     <div role="dialog" class="modal-window" aria-modal="true" bind:this={modal}>
-        <button on:click={onClickClose} class="close-btn">&#x26CC;</button>
+        <!-- <button on:click={onClickClose} class="close-btn">&#x26CC;</button> -->
         <div class="content"><slot>no content</slot></div>
     </div>
 </div>
@@ -73,26 +79,22 @@
         background-color: white;
         border-radius: 5px;
         box-sizing: border-box;
-        /* padding: 0 5px 5px 5px; */
     }
 
-    .close-btn {
-        background-color: green;
+    /* .close-btn {
         align-self: flex-end;
         border-radius: 50px;
         padding: 3px 7px;
         margin-top: 5px ;
         margin-right: 5px ;
         font-weight: bold;
-        color: rgb(142, 178, 209);
+        color: black;
         transition: color .5s;
-        visibility: hidden;
-    }
-
+    } 
     .close-btn:hover { color: white; }
+    */
 
     .content {
-        /* background-color: rgba(255, 255, 255, 1); */
         height: 100%;
         margin: 2px 5px 5px 5px;
         padding: 2px 5px;
