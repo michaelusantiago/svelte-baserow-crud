@@ -44,6 +44,8 @@ export const addNewClient = async (client: Client) => {
         const formData = new FormData()
         formData.append("file", client.fld_logo)
 
+        console.log(client.fld_logo)
+
         try {
             const upload_result = await fetch(UPLOAD_FILE_URL,
             {
@@ -128,11 +130,10 @@ export const updateClient = async (client_id: number, client: Client): Promise<a
 }
 
 export const deleteClient = async (client_id: number): Promise<any> => {
-    //https://api.baserow.io/api/database/rows/table/131590/{row_id}/
     const result = await fetch(API_URL + client_id + "/", {
         method: "DELETE",
         headers: {
-            'Authorization': 'Token xg60L33r7cgNZEA3WvZxOjC7PYkxoTYf'
+            'Authorization': `Token ${BEARER_TOKEN}`
         }
     })
 
